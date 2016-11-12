@@ -17,7 +17,7 @@ It will be helpful to have some existing experience with API gateway and Lambda.
 
 ### AWS credentials
 
-Shep will require your amazon credentials and will load them using the same methods as the AWS CLI tool. Consult [Amazon's CLI documentation](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html) for instructions.
+Shep will require your amazon credentials and will load them using the same methods as the AWS CLI tool. This means that you must have the AWS CLI installed and configured. Consult [Amazon's CLI documentation](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html) for instructions.
 
 ### Installation
 
@@ -25,7 +25,29 @@ Shep will require your amazon credentials and will load them using the same meth
 
 ### Creating a new API
 
-_Coming soon!_
+Once you have the AWS CLI installed and configured with a user with the correct permissions, you can start using shep.
+
+First you'll want to create a new shep project.
+```
+shep new my-api
+cd my-api
+```
+Following the prompts will fully configure the project with a region and an [IAM role](http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role) which will be used to execute your functions.
+
+Next we create an endpoint and the function which it should execute.
+```
+shep generate endpoint
+```
+Following the prompts will create the function folder and populate `api.json` with the specified endpoint. You can now edit the function handler.
+
+Next we'll deploy our project.
+```
+shep deploy
+```
+Since this is the first deploy, this will create all the Lambda functions on AWS and create the API Gateway project.
+
+The API Gateway and Lambda project is now up and ready to handle calls.
+
 
 ### Using an existing API Gateway project
 
