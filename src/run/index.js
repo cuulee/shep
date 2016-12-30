@@ -27,8 +27,7 @@ export default async function (opts) {
   const env = opts.environment || 'development'
   const lambdaConfig = load.lambdaConfig(name)
   const events = load.events(name, opts.event)
-  const [ fileName, handler ] = lambdaConfig.Handler.split('.') || 'handler'
-  console.log(lambaConfig.Handler)
+  const [ fileName, handler ] = lambdaConfig.Handler.split('.')
 
   const context = {}
 
@@ -37,6 +36,9 @@ export default async function (opts) {
   }
 
   const func = requireProject(`dist/${name}/${fileName}`)[handler]
+  if (!func) {
+    throw new Error(`No handler found at dist/${name}/${fileName}[${handler}]`);
+  }
 
   const out = await Promise.map(events, (eventFilename) => {
     const event = requireProject(`functions/${name}/events/${eventFilename}`)
