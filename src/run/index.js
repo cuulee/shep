@@ -27,7 +27,7 @@ export default async function (opts) {
   const env = opts.environment || 'development'
   const lambdaConfig = load.lambdaConfig(name)
   const events = load.events(name, opts.event)
-  const [ fileName, handler ] = lambdaConfig.Handler.split('.')
+  const [ fileName, handler ] = lambdaConfig.Handler.split('.') || 'handler'
 
   const context = {}
 
