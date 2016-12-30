@@ -28,6 +28,7 @@ export default async function (opts) {
   const lambdaConfig = load.lambdaConfig(name)
   const events = load.events(name, opts.event)
   const [ fileName, handler ] = lambdaConfig.Handler.split('.') || 'handler'
+  console.log(lambaConfig.Handler)
 
   const context = {}
 
