@@ -36,7 +36,8 @@ export default async function (opts) {
   }
 
   const func = requireProject(`dist/${name}/${fileName}`)[handler]
-  if (!func) {
+  console.log(func)
+  if (func === undefined) {
     throw new Error(`No handler found at dist/${name}/${fileName}[${handler}]`);
   }
 
